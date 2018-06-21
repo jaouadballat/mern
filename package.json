@@ -14,11 +14,13 @@
     "gravatar": "^1.6.0",
     "jade": "~1.11.0",
     "jsonwebtoken": "^8.3.0",
+    "lodash": "^4.17.10",
     "mongoose": "^5.1.6",
     "morgan": "~1.9.0",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "validator": "^10.4.0"
   },
   "devDependencies": {
     "nodemon": "^1.17.5"

@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
 const passport = require('passport');
+const _ = require('lodash');
 
 const User = require('../models/User');
+const registerValidation = require('../validation/registerValidation');
+const loginValidation = require('../validation/loginValidation');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -10,6 +13,12 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/register', function(req, res, next) {
+
+  //Register Validation
+  const errors  = registerValidation(req.body);
+  if(!_.isEmpty(errors)) return res.json({ errors })
+
+
     User.findOne({email: req.body.email}, function(err, user) {
       if(user) return res.status(400).json({
         msg: 'Email Already exist'
@@ -31,6 +40,11 @@ router.post('/register', function(req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
+
+  //Login Validation
+  const errors = loginValidation(req.body);
+  if(!_.isEmpty(errors)) return res.json({ errors })
+
   let email = req.body.email;
   let password = req.body.password;
   User.findOne({email}, function(err, user) {
