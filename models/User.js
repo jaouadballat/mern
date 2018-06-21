@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const gravatar = require('gravatar');
+const jwt = require('jsonwebtoken');
+
+const config = require('../config/key');
 
 const Schema = mongoose.Schema;
 
@@ -49,6 +52,11 @@ UserSchema.methods.comparPassword = function (candidatePassword, cb) {
 
 UserSchema.methods.gravatar = function(email) {
     this.avatar = gravatar.url(email, { s: '200'});
+}
+
+UserSchema.methods.generateToken = function() {
+    let user = this;
+    return jwt.sign({email:user.email}, config.secret, {expiresIn: "1h"});
 }
 
 module.exports = mongoose.model('User', UserSchema);

@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const passport = require('passport');
 
 const User = require('../models/User');
 
@@ -37,8 +38,17 @@ router.post('/login', function(req, res, next) {
     user.comparPassword(password, function(err, isMatch) {
       if(err) throw err;
       if(!isMatch) return res.json({msg: 'Password Incorrect'});
-      res.json({user});
+      let token = user.generateToken();
+      res.json({token: 'Bearer ' + token});
     });
+  });
+});
+
+router.get('/current', passport.authenticate('jwt', { session: false }), function(req, res) {
+  res.json({
+    _id: req.user._id,
+    name: req.user.name,
+    email: req.user.email,
   });
 });
 
