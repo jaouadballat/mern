@@ -56,7 +56,7 @@ UserSchema.methods.gravatar = function(email) {
 
 UserSchema.methods.generateToken = function() {
     let user = this;
-    return jwt.sign({email:user.email}, config.secret, {expiresIn: "1h"});
+    return jwt.sign({email:user.email, _id: user._id}, config.secret, {expiresIn: "1h"});
 }
 
 module.exports = mongoose.model('User', UserSchema);

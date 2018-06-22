@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/register', function(req, res, next) {
 
-  //Register Validation
+  //Register validation
   const errors  = registerValidation(req.body);
   if(!_.isEmpty(errors)) return res.json({ errors })
 
