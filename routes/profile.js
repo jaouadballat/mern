@@ -5,6 +5,8 @@ const _ = require('lodash');
 
 const Profile = require('../models/Profile');
 const profileValidation = require('../validation/profileValidation');
+const experienceValidation = require('../validation/experienceValidation');
+const educationValidation = require('../validation/educationValidation');
 
 router.get('/', passport.authenticate('jwt', { session: false }), function(req, res, next) {
     Profile.findById(req.user._id)
@@ -44,6 +46,58 @@ router.get('/all', function(req, res, next) {
             if(err) throw err;
             return res.json({profiles});
         });
+});
+
+router.post('/experience', passport.authenticate('jwt', { session: false }), function(req, res, next) {
+
+    const errors = experienceValidation(req.body);
+
+    if(!_.isEmpty(errors)) return res.json({errors});
+    
+    Profile.findById(req.user._id, function(err, profile) {
+        if(err) throw err;
+        newExperience = {
+            title: req.body.title,
+            company: req.body.company,
+            location: req.body.location,
+            from: req.body.from,
+            to: req.body.to,
+            current: req.body.current,
+            description: req.body.description,
+        }
+
+        profile.experience.unshift(newExperience);
+        profile.save(function(err, profile) {
+            if(err) throw err;
+            return res.json({profile});
+        });
+    });
+});
+
+
+router.post('/education', passport.authenticate('jwt', { session: false }), function(req, res, next) {
+
+    const errors = educationValidation(req.body);
+
+    if(!_.isEmpty(errors)) return res.json({errors});
+
+    Profile.findById(req.user._id, function(err, profile) {
+        if(err) throw err;
+        const education = {
+            school : req.body.school,
+            degree : req.body.degree,
+            field : req.body.field,
+            from : req.body.from,
+            to : req.body.to,
+            current : req.body.current,
+            description : req.body.description,
+        }
+        profile.education.unshift(education);
+        profile.save(function(err, profile) {
+            if(err) throw err;
+            return res.json({profile});
+        });
+    });
 });
 
 router.post('/', passport.authenticate('jwt', { session: false }), function(req, res, next) {
