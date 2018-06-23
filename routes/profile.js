@@ -133,4 +133,22 @@ router.post('/', passport.authenticate('jwt', { session: false }), function(req,
 
 });
 
+router.delete('/experience/:experience_id', passport.authenticate('jwt', { session: false }), function(req, res, next) {
+    // Profile.findById(req.user._id, function(err, profile) {
+    //     if(err) throw err;
+    //     const exp = profile.experience.find(exp => exp._id == req.params.experience_id);
+    //     const indexOfExp = profile.experience.indexOf(exp)
+    //     profile.experience.splice(indexOfExp, 1);
+    //     profile.save(function(err, profile) {
+    //         if(err) throw err;
+    //         return res.json(profile);
+    //     });
+    // });
+
+    Profile.findByIdAndUpdate(req.user._id, {$pull: {experience: {_id: req.params.experience_id}}},function(err, profile) {
+        if(err) throw err;
+        return res.json(profile);
+    });
+});
+
 module.exports = router;
