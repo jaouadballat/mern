@@ -4,6 +4,8 @@ const passport = require('passport');
 const _ = require('lodash');
 
 const Profile = require('../models/Profile');
+const User = require('../models/User');
+
 const profileValidation = require('../validation/profileValidation');
 const experienceValidation = require('../validation/experienceValidation');
 const educationValidation = require('../validation/educationValidation');
@@ -134,20 +136,35 @@ router.post('/', passport.authenticate('jwt', { session: false }), function(req,
 });
 
 router.delete('/experience/:experience_id', passport.authenticate('jwt', { session: false }), function(req, res, next) {
-    // Profile.findById(req.user._id, function(err, profile) {
-    //     if(err) throw err;
-    //     const exp = profile.experience.find(exp => exp._id == req.params.experience_id);
-    //     const indexOfExp = profile.experience.indexOf(exp)
-    //     profile.experience.splice(indexOfExp, 1);
-    //     profile.save(function(err, profile) {
-    //         if(err) throw err;
-    //         return res.json(profile);
-    //     });
-    // });
-
-    Profile.findByIdAndUpdate(req.user._id, {$pull: {experience: {_id: req.params.experience_id}}},function(err, profile) {
+    Profile.findById(req.user._id, function(err, profile) {
         if(err) throw err;
-        return res.json(profile);
+        const exp = profile.experience.find(exp => exp._id == req.params.experience_id);
+        const indexOfExp = profile.experience.indexOf(exp)
+        profile.experience.splice(indexOfExp, 1);
+        profile.save(function(err, profile) {
+            if(err) throw err;
+            return res.json(profile);
+        });
+    });
+});
+
+router.delete('/education/:education_id', passport.authenticate('jwt', { session: false }), function (req, res, next) {
+    Profile.findById(req.user._id, function (err, profile) {
+        if (err) throw err;
+        const edu = profile.education.find(edu => edu._id == req.params.education_id);
+        const indexOfEdu = profile.education.indexOf(edu)
+        profile.education.splice(indexOfEdu, 1);
+        profile.save(function (err, profile) {
+            if (err) throw err;
+            return res.json(profile);
+        });
+    });
+});
+
+router.delete('/', passport.authenticate('jwt', { session: false }), function(req, res, next) {
+    User.findByIdAndRemove(req.user._id, function(err, user) {
+        if(err) throw err;
+        return res.json({success: true});
     });
 });
 
