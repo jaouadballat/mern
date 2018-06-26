@@ -15,14 +15,14 @@ router.get('/', function(req, res, next) {
 router.post('/register', function(req, res, next) {
 
   //Register validation
-  const errors  = registerValidation(req.body);
-  if(!_.isEmpty(errors)) return res.json({ errors })
+  const errors = registerValidation(req.body);
+  if(!_.isEmpty(errors)) {
+    return res.status(400).json({ errors });
+  }
 
 
     User.findOne({email: req.body.email}, function(err, user) {
-      if(user) return res.status(400).json({
-        msg: 'Email Already exist'
-      });
+      if(user) return res.status(400).json({error: 'Email already exits'})
       const newUser = new User({
         email: req.body.email,
         password: req.body.password,
@@ -32,7 +32,7 @@ router.post('/register', function(req, res, next) {
       newUser.gravatar(req.body.email);
       newUser.save(function(err, user) {
         if(err)  throw(err);
-        return res.status(200).json({
+        return res.json({
           user
         });
       });

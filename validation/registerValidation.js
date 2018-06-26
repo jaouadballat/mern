@@ -22,7 +22,7 @@ module.exports = function(data) {
         errors.password = "Password required";
     }
 
-    if(!Validator.equals(data.password, data.password_confirm)) {
+    if(!Validator.equals(data.password, data.password2)) {
         errors.password = "Password not match"
     }
 
