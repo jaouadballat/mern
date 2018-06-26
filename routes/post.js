@@ -121,10 +121,6 @@ router.delete('/:post_id/comment/:comment_id', passport.authenticate('jwt', { se
             if(err) throw err;
             return res.json({success: true});
         });
-        // return res.json({
-        //     commentUser:comment.user,
-        //     reqUser: req.user._id
-        // })
     });
 });
 
