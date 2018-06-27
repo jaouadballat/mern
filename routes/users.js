@@ -14,6 +14,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/register', function(req, res, next) {
 
+
   //Register validation
   const errors = registerValidation(req.body);
   if(!_.isEmpty(errors)) {
@@ -22,7 +23,7 @@ router.post('/register', function(req, res, next) {
 
 
     User.findOne({email: req.body.email}, function(err, user) {
-      if(user) return res.status(400).json({error: 'Email already exits'})
+      if (user) return res.status(400).json({ errors: { email: 'Email already exits'}})
       const newUser = new User({
         email: req.body.email,
         password: req.body.password,
