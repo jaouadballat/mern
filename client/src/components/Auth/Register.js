@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import Api from '../../config/Api';
+import userRegister from '../../actions/registerAction';
 
 class Login extends Component {
 
@@ -22,11 +23,13 @@ class Login extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        Api().post('http://localhost:3000/users/register', this.state.user)
-            .then(response => console.log(response.data))
-            .catch(error => {
-                this.setState({ errors: error.response.data.errors});
-            });
+        this.props.userRegister(this.state.user);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.errors.errors) {
+            this.setState({errors: nextProps.errors.errors})
+        }
     }
 
 
@@ -69,4 +72,11 @@ class Login extends Component {
     }
 }
 
-export default Login;
+function mapStateToProps(state) {
+    return {
+        auth: state.authReducer,
+        errors: state.errorsReducer
+    }
+}
+
+export default connect(mapStateToProps, {userRegister})(Login);

@@ -9,7 +9,7 @@ export default (props) => {
     <Router>
       <div>
         <Navbar />
-        {props.children}
+          {props.children}
         <Footer />
       </div>
     </Router>
