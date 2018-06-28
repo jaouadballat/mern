@@ -44,15 +44,15 @@ router.post('/login', function(req, res, next) {
 
   //Login Validation
   const errors = loginValidation(req.body);
-  if(!_.isEmpty(errors)) return res.json({ errors })
+  if(!_.isEmpty(errors)) return res.status(400).json({ errors })
 
   let email = req.body.email;
   let password = req.body.password;
   User.findOne({email}, function(err, user) {
-    if(!user) return res.json({msg: 'Email does not exit'});
+    if(!user) return res.status(400).json({errors: {email: 'Email does not exit'}});
     user.comparPassword(password, function(err, isMatch) {
       if(err) throw err;
-      if(!isMatch) return res.json({msg: 'Password Incorrect'});
+      if(!isMatch) return res.status(400).json({errors: {password: 'Password Incorrect'}});
       let token = user.generateToken();
       res.json({token: 'Bearer ' + token});
     });

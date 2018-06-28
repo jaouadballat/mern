@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import userRegister from '../../actions/registerAction';
+import { registerUser } from '../../actions/userAction';
 
 class Login extends Component {
 
@@ -23,7 +23,7 @@ class Login extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.userRegister(this.state.user);
+        this.props.registerUser(this.state.user);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -79,4 +79,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {userRegister})(Login);
+export default connect(mapStateToProps, { registerUser })(Login);
