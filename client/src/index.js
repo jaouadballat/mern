@@ -12,6 +12,7 @@ import reducers from './reducers';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import { currentUser } from './actions/userAction';
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory();
@@ -22,6 +23,8 @@ const middleware = routerMiddleware(history);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk, middleware)));
+
+store.dispatch(currentUser());
 
 ReactDOM.render(
     <Provider store={store}>

@@ -25,11 +25,12 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
     if(nextProps.errors.errors) {
       this.setState({errors: nextProps.errors.errors.errors});
     }
     if(nextProps.auth.isAuth) {
-      localStorage.setItem('token', nextProps.auth.user.token);
+      localStorage.setItem('token', nextProps.auth.token);
       nextProps.history.push('/dashboard');
     }
   }

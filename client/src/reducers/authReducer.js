@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 const initialState = {
     isAuth: false,
+    token: null,
     user: {}
 }
 
@@ -17,7 +18,19 @@ export default function (state=initialState, action) {
             return {
                 ...state,
                 isAuth: !_.isEmpty(action.payload),
+                token: action.payload
+            }
+        case 'CURRENT_USER': 
+            return {
+                ...state,
+                isAuth: !_.isEmpty(action.payload),
                 user: action.payload
+            }
+        case 'LOGOUT':
+            return {
+                ...state,
+                isAuth: false,
+                user:{}
             }
 
         default: return state;

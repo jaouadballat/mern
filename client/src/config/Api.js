@@ -1,7 +1,11 @@
 import axios from 'axios';
 
-export default () => {
+export default (token = localStorage.getItem('token')) => {
     return axios.create({
-        baseURL: 'http://localhost:3000'
+        baseURL: 'http://localhost:3000',
+            headers: {
+                "Authorization": token,
+            }
     });
 }
+

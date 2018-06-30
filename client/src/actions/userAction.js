@@ -27,8 +27,9 @@ export function loginUser(userData) {
             .then(response => {
                 dispatch({
                     type: 'USER_LOGIN',
-                    payload: response.data
+                    payload: response.data.token
                 });
+                dispatch(currentUser());
             })
             .catch(error => {
                 dispatch({
@@ -36,6 +37,33 @@ export function loginUser(userData) {
                     payload: error.response.data
                 });
             });
+    }
+}
+
+export function currentUser() {
+    return function(dispatch) {
+        Api().get('users/current')
+            .then(response => {
+                dispatch({
+                    type: 'CURRENT_USER',
+                    payload: response.data
+                });
+            }).catch(error => {
+                console.log(error.response.data)
+                if (error.response.data === 'Unauthorized') {
+                    dispatch(push('/login'));
+                }
+            });
+    }
+}
+
+export function logout() {
+    return function(dispatch) {
+        localStorage.clear('token');
+        dispatch({
+            type: 'LOGOUT'
+        });
+        dispatch(push('/login'));
     }
 }
 

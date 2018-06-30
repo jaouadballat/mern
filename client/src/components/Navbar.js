@@ -1,7 +1,44 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { logout } from '../actions/userAction';
 
 class Navbar extends Component {
+
+    authNavbar = () => (
+        <div className="collapse navbar-collapse" id="mobile-nav">
+            <ul className="navbar-nav mr-auto">
+                <li className="nav-item">
+                    <a className="nav-link" href="profiles.html"> Developers</a>
+                </li>
+            </ul>
+
+            <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                    <a className="nav-link" href="#" onClick={this.logout}>Logout</a>
+                </li>
+            </ul>
+        </div>
+    );
+
+    guessNavbar = () => (
+        <div className="collapse navbar-collapse" id="mobile-nav">
+            <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                    <Link className="nav-link" to="/register">Sign Up</Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/login">Login</Link>
+                </li>
+            </ul>
+        </div>
+    );
+
+    logout = () => {
+        this.props.logout();
+    }
+
   render() {
     return (
       <div>
@@ -12,22 +49,8 @@ class Navbar extends Component {
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div className="collapse navbar-collapse" id="mobile-nav">
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item">
-                            <a className="nav-link" href="profiles.html"> Developers</a>
-                        </li>
-                    </ul>
+                    { this.props.auth.isAuth ? this.authNavbar() : this.guessNavbar() }
 
-                    <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/register">Sign Up</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/login">Login</Link>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </nav>
       </div>
@@ -35,4 +58,10 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+function mapStateToProps(state) {
+    return {
+        auth: state.authReducer
+    }
+}
+
+export default connect(mapStateToProps, { logout })(Navbar);
