@@ -16,7 +16,7 @@ class Navbar extends Component {
 
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                    <a className="nav-link" href="#" onClick={this.logout}>Logout</a>
+                    <a className="nav-link" onClick={this.logout}>Logout</a>
                 </li>
             </ul>
         </div>
