@@ -5,6 +5,9 @@ export default function (state = {}, action) {
                 ...state,
                 errors: action.payload
             }
+        case "CLEAR_ERRORS":
+            return {}
+            
         default: return state;
     }
 }

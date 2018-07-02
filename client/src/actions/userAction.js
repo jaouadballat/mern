@@ -8,7 +8,7 @@ export function registerUser(userData, history) {
             .then(response => {
                 dispatch({
                     type: "USER_REGISTER",
-                    payload: response.data
+                    // payload: response.data
                 });
                 dispatch(push('/login'))
             })
@@ -59,9 +59,12 @@ export function currentUser() {
 
 export function logout() {
     return function(dispatch) {
-        localStorage.clear('token');
+        localStorage.removeItem('token');
         dispatch({
             type: 'LOGOUT'
+        });
+        dispatch({
+            type: 'CLEAR_ERRORS'
         });
         dispatch(push('/login'));
     }

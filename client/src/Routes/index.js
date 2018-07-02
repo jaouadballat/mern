@@ -6,6 +6,7 @@ import Landing from '../components/Landing';
 import Login from '../components/Auth/Login';
 import Register from '../components/Auth/Register';
 import Dashboard from '../components/Dashboard';
+import PrivateRoute from '../components/PrivateRoute';
 
 export default () => {
     return (

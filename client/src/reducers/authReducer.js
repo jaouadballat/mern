@@ -8,11 +8,11 @@ const initialState = {
 
 export default function (state=initialState, action) {
     switch(action.type) {
-        case 'USER_REGISTER':
-            return {
-                ...state, 
-                user: action.payload
-            }
+        // case 'USER_REGISTER':
+        //     return {
+        //         ...state, 
+        //         user: action.payload
+        //     }
         
         case 'USER_LOGIN': 
             return {
@@ -26,12 +26,9 @@ export default function (state=initialState, action) {
                 isAuth: !_.isEmpty(action.payload),
                 user: action.payload
             }
-        case 'LOGOUT':
-            return {
-                ...state,
-                isAuth: false,
-                user:{}
-            }
+        case 'LOGOUT': // Try to return initial state
+        
+            return initialState;
 
         default: return state;
     }
