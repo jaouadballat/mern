@@ -49,8 +49,8 @@ export function currentUser() {
                     payload: response.data
                 });
             }).catch(error => {
-                console.log(error.response.data)
                 if (error.response.data === 'Unauthorized') {
+                    localStorage.removeItem('token');
                     dispatch(push('/login'));
                 }
             });
