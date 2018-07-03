@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 
 import { currentUser } from '../../actions/userAction';
 
-export default function (ComponentClass) {
+export default function(ComponentClass) {
 
     class Auth extends Component {
 
@@ -12,46 +11,25 @@ export default function (ComponentClass) {
             this.props.currentUser();
         }
 
-        // state = {
-        //     loading : true
-        // }
-        
-        // componentWillReceiveProps() {
-        //     this.setState({loading: false})
-        // }
-
-        
-        render() {
-            console.log(this.props.auth);
-            if(this.props.auth.isAuth)
-            return (
-                this.props.auth.isAuth === true ?
-                    <ComponentClass {...this.props} />
-                    :
-                    <Redirect to="/login" />
-            ) 
-            else 
-            return <div>waiting</div>
-            // console.log(this.state.loading);
-            // if(!this.state.loading)
-            // return (
-            //     this.props.auth.isAuth === true ? 
-            //         <ComponentClass {...this.props} /> 
-            //         : 
-            //         <Redirect to="/login" />
-            // );
-            // else{
-            //     return null;
-            // }
-        }
+       render() {
+   
+             return(
+                 this.props.auth.isAuth ?
+                <ComponentClass {...this.props} />
+                :
+                <div className="d-flex justify-content-center align-items-center">Waiting...</div>
+            )
+           
+       }
     }
+
 
     function mapStateToProps(state) {
         return {
-            auth: state.authReducer,
-            error: state.errorsReducer
+            auth : state.authReducer
         }
     }
 
-return connect(mapStateToProps, { currentUser })(Auth);
+
+    return connect(mapStateToProps, { currentUser })(Auth);
 }

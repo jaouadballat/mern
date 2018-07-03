@@ -30,9 +30,11 @@ export function loginUser(userData) {
                     type: 'USER_LOGIN',
                     payload: response.data.token
                 });
+                dispatch(push('/dashboard'));
                 dispatch(currentUser());
             })
             .catch(error => {
+                console.log('login error');
                 dispatch({
                     type: 'GET_ERRORS',
                     payload: error.response.data
@@ -54,7 +56,8 @@ export function currentUser() {
                 //     //localStorage.removeItem('token');
                 //     //dispatch(push('/login'));
                 // }
-                console.log(error.response.data);
+               dispatch(push('/login'))
+                console.log('dispatch current'+error.response.data);
             });
     }
 }

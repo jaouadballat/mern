@@ -17,6 +17,9 @@ class Navbar extends Component {
 
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
+                    <Link className="nav-link" to="/create-profile">Create Profile</Link>
+                </li>
+                <li className="nav-item">
                     <a className="nav-link" onClick={this.logout}>Logout</a>
                 </li>
             </ul>

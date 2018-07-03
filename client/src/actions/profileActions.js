@@ -10,10 +10,11 @@ export function getProfile() {
                 });
 
             }).catch(error => {
-                dispatch({
-                    type: 'GET_ERRORS',
-                    payload: error.response.data
-                })
+                console.log('profile unauthorized');
+                // dispatch({
+                //     type: 'GET_ERRORS',
+                //     payload: error.response.data
+                // })
             });
     }
 }

@@ -30,9 +30,9 @@ class Login extends Component {
     if (!_.isEmpty(nextProps.errors)) {
       this.setState({errors: nextProps.errors.errors.errors});
     }
-    if (nextProps.auth.isAuth) {
-      nextProps.history.push('/dashboard')
-    }
+      if (nextProps.auth.isAuth) {
+        nextProps.history.push('/dashboard')
+      }
   }
 
   
