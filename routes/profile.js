@@ -15,7 +15,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), function(req, 
     .populate({path:'user', select: ['name', 'avatar']})
     .exec(function (err, profile) {
         if (err) throw err;
-        if (!profile) return res.status(404).json({ error: 'There is no profile for this user' });
+        if (!profile) return res.json({ error: 'There is no profile for this user' });
         return res.status(200).json({ profile });
     });
 });

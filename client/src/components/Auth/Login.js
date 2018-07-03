@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
 import { loginUser } from '../../actions/userAction';
 import TextFieldGroup from '../utils/TextFieldGroup';
@@ -26,15 +27,15 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.errors.errors) {
+    if (!_.isEmpty(nextProps.errors)) {
       this.setState({errors: nextProps.errors.errors.errors});
     }
-    if(nextProps.auth.isAuth) {
-      localStorage.setItem('token', nextProps.auth.token);
-      nextProps.history.push('/dashboard');
+    if (nextProps.auth.isAuth) {
+      nextProps.history.push('/dashboard')
     }
   }
 
+  
   render() {
     return (
       <div className="login">

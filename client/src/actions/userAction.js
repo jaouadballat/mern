@@ -25,6 +25,7 @@ export function loginUser(userData) {
     return function(dispatch) {
         Api().post('/users/login', userData)
             .then(response => {
+                localStorage.setItem('token', response.data.token);
                 dispatch({
                     type: 'USER_LOGIN',
                     payload: response.data.token
@@ -49,10 +50,11 @@ export function currentUser() {
                     payload: response.data
                 });
             }).catch(error => {
-                if (error.response.data === 'Unauthorized') {
-                    localStorage.removeItem('token');
-                    dispatch(push('/login'));
-                }
+                // if (error.response.data === 'Unauthorized') {
+                //     //localStorage.removeItem('token');
+                //     //dispatch(push('/login'));
+                // }
+                console.log(error.response.data);
             });
     }
 }

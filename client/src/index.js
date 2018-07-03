@@ -24,7 +24,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk, middleware)));
 
-store.dispatch(currentUser());
+ store.dispatch(currentUser());
 
 ReactDOM.render(
     <Provider store={store}>
