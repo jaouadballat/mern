@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { registerUser } from '../../actions/userAction';
-import TextFieldGroup from '../utils/TextFieldGroup';
+import TextField from '../utils/TextField';
 
 class Login extends Component {
 
@@ -47,7 +47,7 @@ class Login extends Component {
                             <p className="lead text-center">Create your DevConnector account</p>
                             <form onSubmit={this.onSubmit}>
 
-                            <TextFieldGroup
+                            <TextField
                                 type="text"
                                 placeholder="Name"
                                 value={this.state.name}
@@ -56,7 +56,7 @@ class Login extends Component {
                                 onChange={this.onChange}
                             />
 
-                            <TextFieldGroup
+                            <TextField
                                 type="email"
                                 placeholder="Email"
                                 value={this.state.email}
@@ -66,7 +66,7 @@ class Login extends Component {
                                 info="This site uses Gravatar so if you want a profile image, use a Gravatar email"
                             />
 
-                            <TextFieldGroup
+                            <TextField
                                 type="password"
                                 placeholder="Password"
                                 value={this.state.password}
@@ -75,7 +75,7 @@ class Login extends Component {
                                 onChange={this.onChange}
                             />
 
-                            <TextFieldGroup
+                            <TextField
                                 type="password"
                                 placeholder="Confirm Password"
                                 value={this.state.password2}

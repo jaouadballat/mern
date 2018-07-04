@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import { loginUser } from '../../actions/userAction';
-import TextFieldGroup from '../utils/TextFieldGroup';
+import TextField from '../utils/TextField';
 
 class Login extends Component {
 
@@ -46,7 +46,7 @@ class Login extends Component {
               <p className="lead text-center">Sign in to your DevConnector account</p>
               <form onSubmit={this.onSubmit}>
 
-              <TextFieldGroup
+              <TextField
                 type="email"
                 placeholder="Email Address"
                 name="email"
@@ -55,7 +55,7 @@ class Login extends Component {
                 onChange={this.onChange}
               />
 
-              <TextFieldGroup
+              <TextField
                 type="password"
                 placeholder="Password"
                 name="password"

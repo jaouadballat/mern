@@ -1,19 +1,20 @@
 import React from 'react'
 
 export default ({
-    error,
     placeholder,
-    type,
     onChange,
     name,
-    value,
-    info
+    value
 }) => {
-  return (
-    <div className="form-group">
-        <input type={type} className={`form-control form-control-lg ${error ? "is-invalid" : ""}`} placeholder={placeholder} name={name} value={value} onChange={onChange} />
-      {info ? <small className="form-text text-muted">{info}</small> : ''}
-        {error ? <div className="invalid-feedback">{error}</div> : ""}
-    </div>
-  )
+    return (
+        <div className="input-group mb-3">
+            <div className="input-group-prepend">
+                <span className="input-group-text">
+                    <i className={`fa fa-${name}`}></i>
+                </span>
+            </div>
+            <input type="text" className="form-control form-control-lg" placeholder={placeholder} name={name} onChange={onChange} value={value} />
+        </div>
+
+    )
 }

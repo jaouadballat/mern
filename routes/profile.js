@@ -105,9 +105,8 @@ router.post('/education', passport.authenticate('jwt', { session: false }), func
 router.post('/', passport.authenticate('jwt', { session: false }), function(req, res, next) {
     
     const errors = profileValidation(req.body);
-    if(!_.isEmpty(errors)) return res.json({ errors });
+    if(!_.isEmpty(errors)) return res.status(400).json({ errors });
 
-        console.log(req.body);
 
     let profileField = {};
      profileField.user = req.user;

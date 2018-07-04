@@ -9,6 +9,8 @@ export default function(state = initialState, action) {
                 ...state,
                 profile: action.payload.profile
             }
+        
+        
         case 'CLEAR_PROFILE':
             return {};
 
