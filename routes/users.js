@@ -64,6 +64,7 @@ router.get('/current', passport.authenticate('jwt', { session: false }), functio
     _id: req.user._id,
     name: req.user.name,
     email: req.user.email,
+    avatar: req.user.avatar
   });
 });
 

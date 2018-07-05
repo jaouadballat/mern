@@ -37,6 +37,19 @@ export function createProfile(profileData) {
     }
 }
 
+export function deleteProfile() {
+   return function(dispatch) {
+       Api().delete('/profile')
+           .then(response => {
+               dispatch({
+                   type: 'DELETE_PROFILE',
+                   payload: {}
+               });
+               dispatch(push('/dashboard'))
+           });
+   }
+}
+
 
 export function clearProfile() {
     return {

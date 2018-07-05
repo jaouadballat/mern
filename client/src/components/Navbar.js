@@ -17,7 +17,9 @@ class Navbar extends Component {
 
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                    <Link className="nav-link" to="/create-profile">Create Profile</Link>
+                    <Link className="nav-link" to="/create-profile">
+                        <img src={this.props.auth.user.avatar} style={{ 'height': "30px", "width": "30px", "borderRadius": "50%" }} />
+                    </Link>
                 </li>
                 <li className="nav-item">
                     <a className="nav-link" onClick={this.logout}>Logout</a>

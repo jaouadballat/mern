@@ -10,6 +10,11 @@ export default function(state = initialState, action) {
                 profile: action.payload.profile
             }
         
+        case 'DELETE_PROFILE':
+            return {
+                ...state,
+                profile: action.payload
+            }
         
         case 'CLEAR_PROFILE':
             return {};

@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
 
 
 import TextField from '../utils/TextField';
 import SelectField from '../utils/SelectField';
 import TextAreaField from '../utils/TextAreaField';
 import TextFieldGroup from '../utils/TextFieldGroup';
-import { createProfile } from '../../actions/profileActions';
+import { createProfile, getProfile } from '../../actions/profileActions';
+import { clearErrors } from '../../actions/errorsAction';
 
 
  class CreateProfile extends Component {
@@ -43,11 +45,22 @@ import { createProfile } from '../../actions/profileActions';
     this.props.createProfile(this.state.profile);
   }
 
+  // componentWillMount() {
+  //   this.props.getProfile()
+  // }
+
+
+
   componentWillReceiveProps(nextProps) {
     if(nextProps.errors) {
       this.setState({errors: nextProps.errors.errors});
-    }
+    }   
   }
+
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
+
 
   toggleSocialNetwork = () => {
     if(this.state.showSocialNetwork) {
@@ -207,8 +220,9 @@ import { createProfile } from '../../actions/profileActions';
 
 function mapStateToProps(state) {
   return {
-    errors: state.errorsReducer.errors
+    errors: state.errorsReducer.errors,
+    profile: state.profileReducer.profile
   }
 }
 
-export default connect(mapStateToProps, { createProfile })(CreateProfile);
+export default connect(mapStateToProps, { createProfile, clearErrors, getProfile })(CreateProfile);

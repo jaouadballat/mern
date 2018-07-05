@@ -8,6 +8,7 @@ import Register from '../components/Auth/Register';
 import Dashboard from '../components/Dashboard';
 import PrivateRoute from '../components/PrivateRoute';
 import CreateProfile from '../components/Profile/CreateProfile';
+import EditProfile from '../components/Profile/EditProfile';
 import Auth from '../components/HOC/Auth';
 
 export default () => {
@@ -17,6 +18,7 @@ export default () => {
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
                 <Route path="/create-profile" component={Auth(CreateProfile)} />
+                <Route path="/edit-profile" component={Auth(EditProfile)} />
                 <Route path="/dashboard" component={Auth(Dashboard)} />
                 <Route path="/" component={Landing} />
             </Switch>

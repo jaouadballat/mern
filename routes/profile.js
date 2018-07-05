@@ -161,7 +161,7 @@ router.delete('/education/:education_id', passport.authenticate('jwt', { session
 });
 
 router.delete('/', passport.authenticate('jwt', { session: false }), function(req, res, next) {
-    User.findByIdAndRemove(req.user._id, function(err, user) {
+    Profile.findByIdAndRemove(req.user._id, function(err, user) {
         if(err) throw err;
         return res.json({success: true});
     });
