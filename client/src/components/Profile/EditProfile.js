@@ -57,34 +57,26 @@ class EditProfile extends Component {
         }
         if (!_.isEmpty(nextProps.profile)) {
             const profile = {};
-            profile.handle = nextProps.profile.handle ? nextProps.profile.handle : '';
-            profile.status = nextProps.profile.status ? nextProps.profile.status : '';
-            profile.website = nextProps.profile.website ? nextProps.profile.website : '';
-            profile.company = nextProps.profile.company ? nextProps.profile.company : '';
-            profile.location = nextProps.profile.location ? nextProps.profile.location : '';
-            profile.github = nextProps.profile.github ? nextProps.profile.github : '';
-            profile.bio = nextProps.profile.bio ? nextProps.profile.bio : '';
-            profile.facebook = nextProps.profile.socials.facebook ? nextProps.profile.socials.facebook : '';
-            profile.tweeter = nextProps.profile.socials.tweeter ? nextProps.profile.socials.tweeter : '';
-            profile.instagram = nextProps.profile.socials.instagram ? nextProps.profile.socials.instagram : '';
-            profile.youtube = nextProps.profile.socials.youtube ? nextProps.profile.socials.youtube : '';
-            profile.linkedin = nextProps.profile.socials.linkedin ? nextProps.profile.socials.linkedin : '';
-            console.log(profile)
+            profile.handle = !_.isEmpty(nextProps.profile.handle) ? nextProps.profile.handle : '';
+            profile.status = !_.isEmpty(nextProps.profile.status) ? nextProps.profile.status : '';
+            profile.website = !_.isEmpty(nextProps.profile.website) ? nextProps.profile.website : '';
+            profile.company = !_.isEmpty(nextProps.profile.company) ? nextProps.profile.company : '';
+            profile.location = !_.isEmpty(nextProps.profile.location) ? nextProps.profile.location : '';
+            profile.githubUserName = !_.isEmpty(nextProps.profile.githubUserName) ? nextProps.profile.githubUserName : '';
+            profile.bio = !_.isEmpty(nextProps.profile.bio) ? nextProps.profile.bio : '';
+            profile.facebook = !_.isEmpty(nextProps.profile.socials.facebook) ? nextProps.profile.socials.facebook : '';
+            profile.tweeter = !_.isEmpty(nextProps.profile.socials.tweeter) ? nextProps.profile.socials.tweeter : '';
+            profile.instagram = !_.isEmpty(nextProps.profile.socials.instagram) ? nextProps.profile.socials.instagram : '';
+            profile.linkedin = !_.isEmpty(nextProps.profile.socials.linkedin) ? nextProps.profile.socials.linkedin : '';
+            profile.youtube = !_.isEmpty(nextProps.profile.socials.youtube) ? nextProps.profile.socials.youtube : '';
+            profile.skills = !_.isEmpty(nextProps.profile.skills) ? nextProps.profile.skills.join() : ''
+            
+
+            this.setState({ profile });
+             
+            
         }
-        // profile.handle = nextProps.profile.handle ? nextProps.profile.handle : '';
-        // profile.status = nextProps.profile.status ? nextProps.profile.status : '';
-        // profile.website = nextProps.profile.website ? nextProps.profile.website : '';
-        // profile.company = nextProps.profile.company ? nextProps.profile.company : '';
-        // profile.location = nextProps.profile.location ? nextProps.profile.location : '';
-        // profile.github = nextProps.profile.github ? nextProps.profile.github : '';
-        // profile.bio = nextProps.profile.bio ? nextProps.profile.bio : '';
-        // profile.socials = {};
-        // profile.socials.facebook = nextProps.profile.socials.facebook ? nextProps.profile.socials.facebook : '';
-        // profile.socials.tweeter = nextProps.profile.socials.tweeter ? nextProps.profile.socials.tweeter : '';
-        // profile.socials.instagram = nextProps.profile.socials.instagram ? nextProps.profile.socials.instagram : '';
-        // profile.socials.youtube = nextProps.profile.socials.youtube ? nextProps.profile.socials.youtube : '';
-        // profile.socials.linkedin = nextProps.profile.socials.linkedin ? nextProps.profile.socials.linkedin : '';
-        //this.setState({profile})
+     
 
     }
 
@@ -100,35 +92,35 @@ class EditProfile extends Component {
                     <TextFieldGroup
                         placeholder="Facebook page URL"
                         name="facebook"
-                        value={this.state.bio}
+                        value={this.state.profile.facebook}
                         onChange={this.onChange}
                     />
 
                     <TextFieldGroup
                         placeholder="Twitter page URL"
                         name="twitter"
-                        value={this.state.tweeter}
+                        value={this.state.profile.tweeter}
                         onChange={this.onChange}
                     />
 
                     <TextFieldGroup
                         placeholder="Instagram page URL"
                         name="instagram"
-                        value={this.state.instagram}
+                        value={this.state.profile.instagram}
                         onChange={this.onChange}
                     />
 
                     <TextFieldGroup
                         placeholder="Linkedin page URL"
                         name="linkedin"
-                        value={this.state.linkedin}
+                        value={this.state.profile.linkedin}
                         onChange={this.onChange}
                     />
 
                     <TextFieldGroup
                         placeholder="Youtube page URL"
                         name="youtube"
-                        value={this.state.youtube}
+                        value={this.state.profile.youtube}
                         onChange={this.onChange}
                     />
                 </div>
@@ -147,7 +139,7 @@ class EditProfile extends Component {
                         <div className="col-md-8 m-auto">
                             <Link to="dashboard" className="btn btn-light">
                                 Go Back
-                    </Link>
+                            </Link>
                             <h1 className="display-4 text-center">Edit Your Profile</h1>
                             <p className="lead text-center">Let's get some information to make your profile stand out</p>
                             <small className="d-block pb-3">* = required field</small>
@@ -156,7 +148,7 @@ class EditProfile extends Component {
                                     type="text"
                                     placeholder="Profile handle"
                                     name="handle"
-                                    value={this.state.handle}
+                                    value={this.state.profile.handle}
                                     error={this.state.errors.handle}
                                     onChange={this.onChange}
                                     info="A unique handle for your profile URL. Your full name, company name, nickname, etc (This CAN'T be changed later)"
@@ -166,6 +158,7 @@ class EditProfile extends Component {
                                     name="status"
                                     error={this.state.errors.status}
                                     onChange={this.onChange}
+                                    value={this.state.profile.status}
                                     info="Give us an idea of where you are at in your career"
                                 />
 
@@ -173,7 +166,7 @@ class EditProfile extends Component {
                                     type="text"
                                     placeholder="Company"
                                     name="company"
-                                    value={this.state.company}
+                                    value={this.state.profile.company}
                                     error=""
                                     onChange={this.onChange}
                                     info="Could be your own company or one you work for"
@@ -183,7 +176,7 @@ class EditProfile extends Component {
                                     type="text"
                                     placeholder="Website"
                                     name="website"
-                                    value={this.state.website}
+                                    value={this.state.profile.website}
                                     error=""
                                     onChange={this.onChange}
                                     info="Could be your own or a company website"
@@ -193,7 +186,7 @@ class EditProfile extends Component {
                                     type="text"
                                     placeholder="Location"
                                     name="location"
-                                    value={this.state.location}
+                                    value={this.state.profile.location}
                                     error=""
                                     onChange={this.onChange}
                                     info="City & state suggested (eg. Boston, MA)"
@@ -203,7 +196,7 @@ class EditProfile extends Component {
                                     type="text"
                                     placeholder="Skills"
                                     name="skills"
-                                    value={this.state.skills}
+                                    value={this.state.profile.skills}
                                     error={this.state.errors.skills}
                                     onChange={this.onChange}
                                     info="Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)"
@@ -212,8 +205,8 @@ class EditProfile extends Component {
                                 <TextField
                                     type="text"
                                     placeholder="Github Username"
-                                    name="github"
-                                    value={this.state.githubUserName}
+                                    name="githubUserName"
+                                    value={this.state.profile.githubUserName}
                                     error=""
                                     onChange={this.onChange}
                                     info="If you want your latest repos and a Github link, include your username"
@@ -222,23 +215,22 @@ class EditProfile extends Component {
                                 <TextAreaField
                                     placeholder="A short bio about yourself"
                                     name="bio"
-                                    value={this.state.bio}
+                                    value={this.state.profile.bio}
                                     error=""
                                     onChange={this.onChange}
                                     info="Tell us a little about yourself"
                                 />
 
                                 <div className="mb-3">
-
                                     <button type="button" className="btn btn-light"
                                         onClick={() => this.setState({ showSocialNetwork: !this.state.showSocialNetwork })}>
                                         Add Social Network Links
-                        </button>
-
+                                     </button>
                                     <span className="text-muted">Optional</span>
                                 </div>
 
                                 {this.toggleSocialNetwork()}
+
                                 <button className="btn btn-info btn-block" type="submit">Create Profile</button>
                             </form>
                         </div>

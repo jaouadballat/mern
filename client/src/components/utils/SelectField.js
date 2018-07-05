@@ -39,9 +39,7 @@ const options = [
     }
 ]
 
-const renderOption = options.map((option, index) => (
-    <option value={option.value} key={index}>{option.name}</option>
-));
+
 
 
 export default ({
@@ -57,8 +55,10 @@ export default ({
         <div className="form-group">
             <select className={`form-control form-control-lg ${error ? "is-invalid" : ""}`} name={name} onChange={onChange} >
 
-                {renderOption }
-
+              {  options.map((option, index) => (
+                    <option value={option.value} selected={option.value == value} key={index}>{option.name}</option>
+                )) }
+                
             </select>
             {info ? <small className="form-text text-muted">{info}</small> : ''}
             {error ? <div className="invalid-feedback">{error}</div> : ""}
