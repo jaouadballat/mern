@@ -50,6 +50,21 @@ export function deleteProfile() {
    }
 }
 
+export function addExperience(experience) {
+    return function(dispatch) {
+        Api().post('/profile/experience', experience)
+            .then(response => {
+                dispatch(push('/dashboard'));
+            }).catch(error => {
+                console.log(error.response.data)
+                dispatch({
+                    type: 'GET_ERRORS',
+                    payload: error.response.data
+                });
+            });
+    }
+}
+
 
 export function clearProfile() {
     return {

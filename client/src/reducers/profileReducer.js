@@ -18,6 +18,8 @@ export default function(state = initialState, action) {
         
         case 'CLEAR_PROFILE':
             return {};
+        
+        
 
         default: return state;
     }

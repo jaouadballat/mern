@@ -10,6 +10,7 @@ import PrivateRoute from '../components/PrivateRoute';
 import CreateProfile from '../components/Profile/CreateProfile';
 import EditProfile from '../components/Profile/EditProfile';
 import Auth from '../components/HOC/Auth';
+import AddExperience from '../components/experience/AddExperience';
 
 export default () => {
     return (
@@ -19,6 +20,7 @@ export default () => {
                 <Route path="/register" component={Register} />
                 <Route path="/create-profile" component={Auth(CreateProfile)} />
                 <Route path="/edit-profile" component={Auth(EditProfile)} />
+                <Route path="/add-experience" component={Auth(AddExperience)} />
                 <Route path="/dashboard" component={Auth(Dashboard)} />
                 <Route path="/" component={Landing} />
             </Switch>

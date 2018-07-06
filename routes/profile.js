@@ -54,7 +54,7 @@ router.post('/experience', passport.authenticate('jwt', { session: false }), fun
 
     const errors = experienceValidation(req.body);
 
-    if(!_.isEmpty(errors)) return res.json({errors});
+    if(!_.isEmpty(errors)) return res.status(400).json({errors});
     
     Profile.findById(req.user._id, function(err, profile) {
         if(err) throw err;
