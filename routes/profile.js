@@ -81,7 +81,7 @@ router.post('/education', passport.authenticate('jwt', { session: false }), func
 
     const errors = educationValidation(req.body);
 
-    if(!_.isEmpty(errors)) return res.json({errors});
+    if(!_.isEmpty(errors)) return res.status(400).json({errors});
 
     Profile.findById(req.user._id, function(err, profile) {
         if(err) throw err;

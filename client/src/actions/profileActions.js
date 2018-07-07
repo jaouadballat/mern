@@ -1,6 +1,7 @@
 import { push } from 'react-router-redux';
 
 import Api from '../config/Api';
+import AddEducation from '../components/education/AddEducation';
 
 export function getProfile() {
     return function(dispatch) {
@@ -61,6 +62,38 @@ export function addExperience(experience) {
                     type: 'GET_ERRORS',
                     payload: error.response.data
                 });
+            });
+    }
+}
+
+export function addEducation(education) {
+    return function(dispatch) {
+        Api().post('/profile/education', education)
+            .then(response => {
+                dispatch(push('/dashboard'));
+            }).catch(error => {
+                dispatch({
+                    type: 'GET_ERRORS',
+                    payload: error.response.data
+                });
+            });
+    }
+}
+
+export function deleteExperience(expId) {
+    return function(dispatch) {
+        Api().delete(`/profile/experience/${expId}`)
+            .then(response => {
+                dispatch(push('/dashboard'));
+            });
+    } 
+}
+
+export function deleteEducation(eduId) {
+    return function (dispatch) {
+        Api().delete(`/profile/education/${eduId}`)
+            .then(response => {
+                dispatch(push('/dashboard'));
             });
     }
 }

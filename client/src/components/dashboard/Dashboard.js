@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
 
-import { getProfile, deleteProfile } from '../actions/profileActions';
-import profileReducer from '../reducers/profileReducer';
+import { getProfile, deleteProfile } from '../../actions/profileActions';
+import profileReducer from '../../reducers/profileReducer';
+import Experiences from './Experiences';
+import Educations from './Educations';
 
 class Dashboard extends Component {
 
@@ -16,7 +19,23 @@ class Dashboard extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.deleteProfile()
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this data",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          this.props.deleteProfile()
+
+          swal("This data has been deleted successfully!", {
+            icon: "success",
+          });
+        }
+      });
+    
   }
   
 
@@ -36,6 +55,10 @@ renderDashboard = () => {
                   <i className="fa fa-graduation-cap text-info mr-1"></i>
                   Add Education</Link>
               </div>
+
+            <Experiences experiences={this.props.profile.experience} />
+            <Educations educations={this.props.profile.education} />
+
              <form onSubmit={this.onSubmit}>
                <button className="btn btn-danger" type="submit">Delete Profile</button>
              </form>

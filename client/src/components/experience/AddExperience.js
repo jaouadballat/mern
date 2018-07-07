@@ -104,7 +104,7 @@ import { clearErrors } from '../../actions/errorsAction';
                             />
 
                             <CheckboxField
-                                onClick={() => this.setState({ current: !this.state.current })}
+                                onClick={() => this.setState({ current: !this.state.experience.current })}
                                 label="Current Job"
                                 name="current"
                             />
