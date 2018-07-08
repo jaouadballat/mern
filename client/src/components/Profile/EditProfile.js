@@ -42,6 +42,7 @@ class EditProfile extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
+        //console.log(this.state.profile)
         this.props.createProfile(this.state.profile);
     }
 
@@ -52,6 +53,7 @@ class EditProfile extends Component {
 
 
     componentWillReceiveProps(nextProps) {
+        console.log(nextProps)
         if (nextProps.errors) {
             this.setState({ errors: nextProps.errors.errors });
         }
@@ -64,19 +66,21 @@ class EditProfile extends Component {
             profile.location = !_.isEmpty(nextProps.profile.location) ? nextProps.profile.location : '';
             profile.githubUserName = !_.isEmpty(nextProps.profile.githubUserName) ? nextProps.profile.githubUserName : '';
             profile.bio = !_.isEmpty(nextProps.profile.bio) ? nextProps.profile.bio : '';
-            profile.facebook = !_.isEmpty(nextProps.profile.socials.facebook) ? nextProps.profile.socials.facebook : '';
-            profile.tweeter = !_.isEmpty(nextProps.profile.socials.tweeter) ? nextProps.profile.socials.tweeter : '';
-            profile.instagram = !_.isEmpty(nextProps.profile.socials.instagram) ? nextProps.profile.socials.instagram : '';
-            profile.linkedin = !_.isEmpty(nextProps.profile.socials.linkedin) ? nextProps.profile.socials.linkedin : '';
-            profile.youtube = !_.isEmpty(nextProps.profile.socials.youtube) ? nextProps.profile.socials.youtube : '';
-            profile.skills = !_.isEmpty(nextProps.profile.skills) ? nextProps.profile.skills.join() : ''
-            
 
-            this.setState({ profile });
-             
+            if(!_.isEmpty(nextProps.profile.socials)) {
+
+                profile.facebook = !_.isEmpty(nextProps.profile.socials.facebook) ? nextProps.profile.socials.facebook : '';
+                profile.tweeter = !_.isEmpty(nextProps.profile.socials.tweeter) ? nextProps.profile.socials.tweeter : '';
+                profile.instagram = !_.isEmpty(nextProps.profile.socials.instagram) ? nextProps.profile.socials.instagram : '';
+                profile.linkedin = !_.isEmpty(nextProps.profile.socials.linkedin) ? nextProps.profile.socials.linkedin : '';
+                profile.youtube = !_.isEmpty(nextProps.profile.socials.youtube) ? nextProps.profile.socials.youtube : '';
+                profile.skills = !_.isEmpty(nextProps.profile.skills) ? nextProps.profile.skills.join() : ''
             
+            }
+            
+            profile.skills = nextProps.profile.skills.join();
+            this.setState({ profile });
         }
-     
 
     }
 
@@ -231,7 +235,7 @@ class EditProfile extends Component {
 
                                 {this.toggleSocialNetwork()}
 
-                                <button className="btn btn-info btn-block" type="submit">Create Profile</button>
+                                <button className="btn btn-info btn-block" type="submit">Update Profile</button>
                             </form>
                         </div>
                     </div>

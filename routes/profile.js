@@ -43,7 +43,7 @@ router.get('/user/:user_id', passport.authenticate('jwt', { session: false }), f
 
 router.get('/all', function(req, res, next) {
     Profile.find()
-        .populate({path: 'users', select: ['email', 'name']})
+        .populate({path: 'user', select: ['avatar', 'name']})
         .exec(function(err, profiles) {
             if(err) throw err;
             return res.json({profiles});

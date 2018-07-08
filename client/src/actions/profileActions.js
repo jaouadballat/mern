@@ -26,7 +26,6 @@ export function createProfile(profileData) {
     return function(dispatch) {
         Api().post('/profile', profileData)
             .then(response => {
-                console.log(response.data)
                 dispatch(push('/dashboard'))
             }).catch(error => {
                 console.log(error.response.data)
@@ -96,6 +95,35 @@ export function deleteEducation(eduId) {
                 dispatch(push('/dashboard'));
             });
     }
+}
+
+export function getProfiles() {
+    return function(dispatch) {
+        Api().get('/profile/all')
+            .then(response => {
+                dispatch({
+                    type: 'GET_PROFILES',
+                    payload: response.data
+                });
+            });
+    }
+} 
+
+export function getProfileByHandle(handle) {
+   return function(dispatch) {
+       Api().get(`/profile/handle/${handle}`)
+       .then(response => {
+        dispatch({
+            type: 'GET_PROFILE_HANDLE',
+            payload: response.data
+        })
+       }).catch(error => {
+           dispatch({
+               type: 'GET_ERRORS',
+               payload: error.response.data
+           });
+       });
+   }
 }
 
 

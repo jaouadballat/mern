@@ -1,5 +1,7 @@
 const initialState = {
-    profile : {}
+    profile : {},
+    profiles: {},
+    handle: {}
 }
 
 export default function(state = initialState, action) {
@@ -14,6 +16,18 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 profile: action.payload
+            }
+
+        case 'GET_PROFILES':
+            return {
+                ...state,
+                profiles: action.payload.profiles
+            }
+        
+        case 'GET_PROFILE_HANDLE':
+            return {
+                ...state,
+                handle: action.payload.profile
             }
         
         case 'CLEAR_PROFILE':

@@ -37,7 +37,7 @@ router.get('/', function(req, res) {
 router.get('/:post_id', passport.authenticate('jwt', { session: false }), function(req, res) {
     Post.findById(req.params.post_id, function(err, post) {
         if(err) throw err;
-        if(!post) return res.json({msg: 'post not found'});
+        if(!post) return res.status(400).json({msg: 'post not found'});
         return res.json(post);
     });
 });
