@@ -8,7 +8,6 @@ import Header from './Header';
 import About from './About';
 import Experience from './Experience';
 import Education from './Education';
-import { networkInterfaces } from 'os';
 
 class Profile extends Component {
     

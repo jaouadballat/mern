@@ -56,7 +56,7 @@ export default ({
             <select className={`form-control form-control-lg ${error ? "is-invalid" : ""}`} name={name} onChange={onChange} >
 
               {  options.map((option, index) => (
-                    <option value={option.value} selected={option.value == value} key={index}>{option.name}</option>
+                    <option value={option.value} selected={option.value === value} key={index}>{option.name}</option>
                 )) }
                 
             </select>

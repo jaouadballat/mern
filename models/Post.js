@@ -5,17 +5,11 @@ const Schema = mongoose.Schema;
 const PostSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
-        ref: "User"
+        ref: 'User'
     },
     text: {
         type: String,
         required: true
-    },
-    name: {
-        type: String
-    },
-    avatar: {
-        type: String
     },
     likes: [
         {

@@ -1,7 +1,6 @@
 import { push } from 'react-router-redux';
 
 import Api from '../config/Api';
-import AddEducation from '../components/education/AddEducation';
 
 export function getProfile() {
     return function(dispatch) {

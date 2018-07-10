@@ -11,26 +11,26 @@ const commentValidation = require('../validation/commentValidation');
 router.post('/', passport.authenticate('jwt', { session: false }), function (req, res, next) {
 
     const errors = postValidation(req.body);
-    if(!_.isEmpty(errors)) return res.json(errors);
+    if(!_.isEmpty(errors)) return res.status(400).json({errors});
 
     const post = new Post({
-        name: req.body.name,
-        avatar: req.body.avatar,
         text: req.body.text,
         user: req.user._id
     });
 
     post.save(function(err, post) {
         if(err) throw err;
-        return res.json(post);
+        return res.json({post});
     });
 });
 
 router.get('/', function(req, res) {
-    Post.find().sort({'date': 'desc'})
+    Post.find()
+    .populate({ path: 'user', select: ['avatar', 'name'] })
+    .sort({created_at: 'desc'})
     .exec(function (err, posts) {
         if (err) throw err;
-            return res.json(posts);
+            return res.json({posts});
         });
 });
 
@@ -45,7 +45,7 @@ router.get('/:post_id', passport.authenticate('jwt', { session: false }), functi
 router.delete('/:post_id', passport.authenticate('jwt', { session: false }), function(req, res, next) {
         Post.findById(req.params.post_id, function(err, post) {
             if(err) throw err;
-            if(!post) return res.json("post not found");
+            if(!post) return res.status(404).json("post not found");
             if(req.user._id.toString() !== post.user.toString()) return res.json('Unauthorized');
             return post.remove(function(err) {
                 if(err) throw err;

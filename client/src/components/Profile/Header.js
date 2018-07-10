@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import { Link } from 'react-router-dom';
 
 export default ({profile}) => {
    
@@ -21,42 +22,42 @@ export default ({profile}) => {
                       <p>{profile.location}</p>
                       <div className="d-flex justify-content-center">
                           { profile.website ? 
-                            <a className="text-white p-2" href="#">
+                            <Link className="text-white p-2" to="#">
                                 <i className="fa fa-globe fa-2x"></i>
-                            </a> : 
+                            </Link> : 
                             <div></div>
                           }
                           { profile.socials.tweeter ? 
-                            <a className="text-white p-2" href="#">
+                            <Link className="text-white p-2" to="#">
                                 <i className="fa fa-twitter fa-2x"></i>
-                            </a> :
+                            </Link> :
                             <div></div>
                           }
 
                           {profile.socials.facebook ?
-                              <a className="text-white p-2" href="#">
+                              <Link className="text-white p-2" to="#">
                                   <i className="fa fa-facebook fa-2x"></i>
-                              </a> :
+                              </Link> :
                               <div></div>
                           }
                           
                           {profile.socials.instagram ?
-                              <a className="text-white p-2" href="#">
+                              <Link className="text-white p-2" to="#">
                                   <i className="fa fa-instagram fa-2x"></i>
-                              </a> :
+                              </Link> :
                               <div></div>
                           }
                           
                           {profile.socials.linkedin ?
-                              <a className="text-white p-2" href="#">
+                              <Link className="text-white p-2" to="#">
                                   <i className="fa fa-linkedin fa-2x"></i>
-                              </a> :
+                              </Link> :
                               <div></div>
                           }
                           {profile.socials.youtube ?
-                              <a className="text-white p-2" href="#">
+                              <Link className="text-white p-2" to="#">
                                   <i className="fa fa-youtube fa-2x"></i>
-                              </a> :
+                              </Link> :
                               <div></div>
                           }
                       </div>

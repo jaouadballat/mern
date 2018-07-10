@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 
 import { getProfile, deleteProfile } from '../../actions/profileActions';
-import profileReducer from '../../reducers/profileReducer';
 import Experiences from './Experiences';
 import Educations from './Educations';
 
